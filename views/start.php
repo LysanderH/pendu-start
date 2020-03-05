@@ -27,14 +27,14 @@
             <label for="triedLetter">Choisis ta lettre</label>
             <select name="triedLetter"
                     id="triedLetter">
-                <?php foreach ($lettersToTry as $letter => $val): ?>
-                    <?php if ($val === true): ?>
+                <?php foreach ($_SESSION['letters'] as $letter => $val): ?>
+                    <?php if ($val): ?>
                         <option value="<?= $letter ?>"><?= $letter; ?></option>
                     <?php endif; ?>
                 <?php endforeach; ?>
             </select>
             <input type="submit"
-                   value="essayer cette lettre">
+                   value="Essayer cette lettre">
         </div>
     </fieldset>
 </form>

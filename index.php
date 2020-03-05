@@ -1,34 +1,18 @@
 <?php
 
+session_start();
+
 include('configs/config.php');
 
-$lettersToTry = [
-    'a'=>true,
-    'b'=>true,
-    'c'=>true,
-    'd'=>true,
-    'e'=>true,
-    'f'=>true,
-    'g'=>true,
-    'h'=>true,
-    'i'=>true,
-    'j'=>true,
-    'k'=>true,
-    'l'=>true,
-    'm'=>true,
-    'n'=>true,
-    'o'=>true,
-    'p'=>true,
-    'q'=>true,
-    'r'=>true,
-    's'=>true,
-    't'=>true,
-    'u'=>true,
-    'v'=>true,
-    'w'=>true,
-    'x'=>true,
-    'y'=>true,
-    'z'=>true,
-];
+if (!isset($_SESSION['letters'])) {
+    $_SESSION['letters'] = LETTERS;
+}
+
+if (isset($_POST['triedLetter'])) {
+    $triedLetter = $_POST['triedLetter'];
+    $_SESSION['letters'][$triedLetter] = false;
+}
+
+
 
 require('views/start.php');
