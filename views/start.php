@@ -16,7 +16,7 @@
          alt="">
 </div>
 <div>
-    <p>Voici les lettres que tu as déjà essayées&nbsp;: </p>
+    <p>Voici les lettres que tu as déjà essayées&nbsp;: <?= $_SESSION['tryedLetters']; ?></p>
 </div>
 <form action="index.php"
       method="post">
