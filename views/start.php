@@ -9,10 +9,10 @@
     <h1>Trouve le mot en moins de 8 coups !</h1>
 </div>
 <div>
-    <p>Le mot à deviner compte 9 lettres&nbsp;: *********</p>
+    <p>Le mot à deviner compte <?= $nbLetters; ?> lettres&nbsp;: <?= $_SESSION['replacementString'] ?></p>
 </div>
 <div>
-    <img src="images/pendu0.gif"
+    <img src="images/pendu<?= $_SESSION['tryels']; ?>.gif"
          alt="">
 </div>
 <div>
@@ -21,7 +21,7 @@
 <form action="index.php"
       method="post">
     <fieldset>
-        <legend>Il te reste 8 essais pour sauver ta peau
+        <legend>Il te reste <?= MAX_TRIALS - $_SESSION['tryels']; ?> essais pour sauver ta peau
         </legend>
         <div>
             <label for="triedLetter">Choisis ta lettre</label>
