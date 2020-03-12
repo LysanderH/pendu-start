@@ -73,6 +73,9 @@ if (isset($_POST['triedLetter'])) {
     }
 }
 
+$howManyReplacementChar = substr_count($_SESSION['replacementString'],REPLACEMENT_CHAR,0);
+var_dump($howManyReplacementChar);
+
 
 if (isset($_GET['restart'])) {
     $_SESSION['wordIndex'] = rand(0, TOTAL_WORDS);

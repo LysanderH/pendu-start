@@ -18,33 +18,39 @@
 <div>
     <p>Voici les lettres que tu as déjà essayées&nbsp;: <?= $_SESSION['tryedLetters']; ?></p>
 </div>
-<?php if ($_SESSION['tryels'] >=8 ): ?>
+<?php if ($_SESSION['tryels'] >= 8): ?>
     <div>
         <p class="bg-danger lead">OOOps&nbsp;! Tu sembles bien mort&nbsp;! Le mot à trouver était
-            «&nbsp;<b>decousent</b>&nbsp;». <a href="index.php?restart=true">Recommence&nbsp;!</a>
+            «&nbsp;<b><?= $word; ?>></b>&nbsp;». <a href="index.php?restart=true">Recommence&nbsp;!</a>
+        </p>
+    </div>
+<?php elseif ($howManyReplacementChar === 0): ?>
+    <div>
+        <p class="bg-success lead">Bravo&nbsp;! Tu as trouvé le mot
+            «&nbsp;<b><?= $word['word']; ?></b>&nbsp;». <a href="index.php?restart=true">Recommence&nbsp;!</a>
         </p>
     </div>
 <?php else: ?>
-<form action="index.php"
-      method="post">
-    <fieldset>
-        <legend>Il te reste <?= MAX_TRIALS - $_SESSION['tryels']; ?> essais pour sauver ta peau
-        </legend>
-        <div>
-            <label for="triedLetter">Choisis ta lettre</label>
-            <select name="triedLetter"
-                    id="triedLetter">
-                <?php foreach ($_SESSION['letters'] as $letter => $val): ?>
-                    <?php if ($val): ?>
-                        <option value="<?= $letter ?>"><?= $letter; ?></option>
-                    <?php endif; ?>
-                <?php endforeach; ?>
-            </select>
-            <input type="submit"
-                   value="Essayer cette lettre">
-        </div>
-    </fieldset>
-</form>
+    <form action="index.php"
+          method="post">
+        <fieldset>
+            <legend>Il te reste <?= MAX_TRIALS - $_SESSION['tryels']; ?> essais pour sauver ta peau
+            </legend>
+            <div>
+                <label for="triedLetter">Choisis ta lettre</label>
+                <select name="triedLetter"
+                        id="triedLetter">
+                    <?php foreach ($_SESSION['letters'] as $letter => $val): ?>
+                        <?php if ($val): ?>
+                            <option value="<?= $letter ?>"><?= $letter; ?></option>
+                        <?php endif; ?>
+                    <?php endforeach; ?>
+                </select>
+                <input type="submit"
+                       value="Essayer cette lettre">
+            </div>
+        </fieldset>
+    </form>
 <?php endif; ?>
 </body>
 </html>
