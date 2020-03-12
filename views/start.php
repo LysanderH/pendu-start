@@ -18,6 +18,13 @@
 <div>
     <p>Voici les lettres que tu as déjà essayées&nbsp;: <?= $_SESSION['tryedLetters']; ?></p>
 </div>
+<?php if ($_SESSION['tryels'] >=8 ): ?>
+    <div>
+        <p class="bg-danger lead">OOOps&nbsp;! Tu sembles bien mort&nbsp;! Le mot à trouver était
+            «&nbsp;<b>decousent</b>&nbsp;». <a href="index.php?restart=true">Recommence&nbsp;!</a>
+        </p>
+    </div>
+<?php else: ?>
 <form action="index.php"
       method="post">
     <fieldset>
@@ -38,5 +45,6 @@
         </div>
     </fieldset>
 </form>
+<?php endif; ?>
 </body>
 </html>

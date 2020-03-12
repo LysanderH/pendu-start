@@ -16,7 +16,7 @@ if (!isset($_SESSION['tryels'])) {
     $_SESSION['tryels'] = 0;
 }
 if (!isset($_SESSION['wordIndex'])) {
-    $_SESSION['wordIndex'] = rand(0,TOTAL_WORDS);
+    $_SESSION['wordIndex'] = rand(0, TOTAL_WORDS);
 }
 
 
@@ -52,13 +52,37 @@ if (!isset($_SESSION['replacementString'])) {
     $_SESSION['replacementString'] = str_pad('', $nbLetters, REPLACEMENT_CHAR);
 }
 
-
+$found = false;
 // Store the alphabet and the tryed letters in session
 if (isset($_POST['triedLetter'])) {
     $triedLetter = $_POST['triedLetter'];
     $_SESSION['tryedLetters'] .= $triedLetter;
     $_SESSION['letters'][$triedLetter] = false;
+
+// Si la lettre essayée est dans le mot il faut la remplacer à l'index de la replacmentString
+    for ($i = 0; $i < $nbLetters; $i++) {
+        $letter = substr($word['word'], $i, 1);
+        if (strtoupper($triedLetter) === $letter) {
+            $found = true;
+            $_SESSION['replacementString'] = substr_replace($_SESSION['replacementString'], strtoupper($triedLetter), $i, 1);
+            var_dump($_SESSION['replacementString']);
+        }
+    }
+    if ($found === false) {
+        $_SESSION['tryels']++;
+    }
 }
-$_SESSION['tryels'] = strlen($_SESSION['tryedLetters']);
+
+
+if (isset($_GET['restart'])) {
+    $_SESSION['wordIndex'] = rand(0, TOTAL_WORDS);
+    $_SESSION['letters'] = LETTERS;
+    $_SESSION['tryedLetters'] = '';
+    $_SESSION['tryels'] = 0;
+    $nbLetters = strlen($word['word']);
+    $_SESSION['replacementString'] = str_pad('', $nbLetters, REPLACEMENT_CHAR);
+}
+
+
 // Require the views
 require('views/start.php');
