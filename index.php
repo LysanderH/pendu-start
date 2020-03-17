@@ -73,16 +73,16 @@ if (isset($_POST['triedLetter'])) {
     }
 }
 
-$howManyReplacementChar = substr_count($_SESSION['replacementString'],REPLACEMENT_CHAR,0);
-var_dump($howManyReplacementChar);
+$howManyReplacementChar = substr_count($_SESSION['replacementString'], REPLACEMENT_CHAR, 0);
 
 
-if (isset($_GET['restart'])) {
-    $_SESSION['wordIndex'] = rand(0, TOTAL_WORDS);
-    $_SESSION['letters'] = LETTERS;
+if ($_SERVER['REQUEST_METHOD'] == 'GET') {
     $_SESSION['tryedLetters'] = '';
-    $_SESSION['tryels'] = 0;
+    $_SESSION['wordIndex'] = rand(0, TOTAL_WORDS);
+    // Hier hin datenbank lesen
     $nbLetters = strlen($word['word']);
+    $_SESSION['tryels'] = 0;
+    $_SESSION['letters'] = LETTERS;
     $_SESSION['replacementString'] = str_pad('', $nbLetters, REPLACEMENT_CHAR);
 }
 
