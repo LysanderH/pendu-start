@@ -9,7 +9,7 @@
     <h1>Trouve le mot en moins de 8 coups !</h1>
 </div>
 <div>
-    <p>Le mot à deviner compte <?= $nbLetters; ?> lettres&nbsp;: <?= $_SESSION['replacementString'] ?></p>
+    <p>Le mot à deviner compte <?= $_SESSION['nbLetters']; ?> lettres&nbsp;: <?= $_SESSION['replacementString'] ?></p>
 </div>
 <div>
     <img src="images/pendu<?= $_SESSION['tryels']; ?>.gif"
@@ -21,13 +21,13 @@
 <?php if ($_SESSION['tryels'] >= 8): ?>
     <div>
         <p class="bg-danger lead">OOOps&nbsp;! Tu sembles bien mort&nbsp;! Le mot à trouver était
-            «&nbsp;<b><?= $word; ?>></b>&nbsp;». <a href="index.php?restart=true">Recommence&nbsp;!</a>
+            «&nbsp;<b><?= $_SESSION['word'][0]; ?>></b>&nbsp;». <a href="index.php?restart=true">Recommence&nbsp;!</a>
         </p>
     </div>
 <?php elseif ($howManyReplacementChar === 0): ?>
     <div>
         <p class="bg-success lead">Bravo&nbsp;! Tu as trouvé le mot
-            «&nbsp;<b><?= $word['word']; ?></b>&nbsp;». <a href="index.php?restart=true">Recommence&nbsp;!</a>
+            «&nbsp;<b><?= $_SESSION['word'][0]; ?></b>&nbsp;». <a href="index.php?restart=true">Recommence&nbsp;!</a>
         </p>
     </div>
 <?php else: ?>
